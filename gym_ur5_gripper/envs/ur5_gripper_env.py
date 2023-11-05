@@ -450,7 +450,9 @@ class UR5GripperEnv(mujoco_env.MujocoEnv, utils.EzPickle):
         ctrl_range = self.sim.model.actuator_ctrlrange
         bias = 0.5 * (ctrl_range[:, 1] + ctrl_range[:, 0])
         weight = 0.5 * (ctrl_range[:, 1] - ctrl_range[:, 0])
-        applied_action = bias + weight * gripper_action_actual
+        # applied_action = bias + weight * gripper_action_actual
+        #xinhui add this
+        applied_action = bias + weight * gripper_ctrl
         # print("applied_action: ", applied_action)
         self.sim.data.ctrl[:] = applied_action[:] # don't use a random action for gripper
 
